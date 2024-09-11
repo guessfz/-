@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>视频解析工具</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1c1c1c;
+            color: #fff;
+        }
+        .header {
+            background-color: #2c2c2c;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+            font-weight: bold;
+        }
+        .nav {
+            background-color: #333;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .nav a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .nav a:hover {
+            background-color: #575757;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #2c2c2c;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label, select, input, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 2px solid #575757;
+            background-color: #333;
+            color: #fff;
+        }
+        button {
+            background-color: #575757;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #777;
+            transform: scale(1.05);
+        }
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        .episodes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .episode {
+            flex: 1 1 calc(10% - 10px);
+            background-color: #333;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .episode:hover {
+            background-color: #575757;
+            transform: scale(1.05);
+        }
+        .supported-sites {
+            margin-top: 40px;
+        }
+        .supported-sites h4 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .supported-sites p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .col {
+            flex: 1 1 calc(16.66% - 20px);
+            text-align: center;
+        }
+        .col img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .col img:hover {
+            transform: scale(1.1);
+        }
+        .footer {
+            background-color: #2c2c2c;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>视频解析工具</h1>
+    </div>
+     <div class="container">
+        <div class="supported-sites">
+            <h4>支持以下网站视频</h4>
+            <p>使用方法：进入各大视频网站，找到想要观看的VIP视频，然后复制链接（浏览器上的视频地址），粘贴到视频的输入框，并点击“解析播放”即可！</p>
+            <div class="row">
+                <div class="col">
+                    <a href="http://vip.iqiyi.com/" target="_blank" title="爱奇艺会员">
+                        <img src="img/iqiyilogo.png" alt="爱奇艺会员">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://film.qq.com/" target="_blank" title="腾讯会员中心">
+                        <img src="img/qqlogo.png" alt="腾讯会员中心">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://vip.youku.com/" target="_blank" title="优酷会员中心">
+                        <img src="img/youkulogo.png" alt="优酷会员中心">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://www.mgtv.com/vip/" target="_blank" title="芒果会员中心">
+                        <img src="img/hunantvlogo.png" alt="芒果会员中心">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://yuanxian.le.com/" target="_blank" title="乐视会员中心">
+                        <img src="img/letvlogo.png" alt="乐视会员中心">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://vip.tudou.com" target="_blank" title="土豆会员中心">
+                        <img src="img/tudoulogo.png" alt="土豆会员中心">
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a href="http://www.baofeng.com/" target="_blank" title="暴风会员">
+                        <img src="img/baofeng.png" alt="暴风会员">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://vip.1905.com/" target="_blank" title="1905电影网视频">
+                        <img src="img/1905logo.png" alt="1905电影网视频">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://vip.kankan.com/" target="_blank" title="天天看看">
+                        <img src="img/kankan.png" alt="天天看看">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://www.pptv.com/" target="_blank" title="PPTV聚力">
+                        <img src="img/pptv.png" alt="PPTV聚力">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://www.yinyuetai.com/" target="_blank" title="音悦台MV">
+                        <img src="img/yinyuetailogo.png" alt="音悦台MV">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://www.56.com/" target="_blank" title="56视频">
+                        <img src="img/56logo.png" alt="56视频">
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a href="http://www.fun.vip" target="_blank" title="风行视频">
+                        <img src="img/fengxing.png" alt="风行视频">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://movie.ku6.com/" target="_blank" title="酷6视频">
+                        <img src="img/ku6logo.png" alt="酷6视频">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://vip.wasu.cn/" target="_blank" title="WASU华数视频">
+                        <img src="img/wasulogo.png" alt="WASU华数视频">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://video.sina.com.cn/" target="_blank" title="新浪视频">
+                        <img src="img/sinalogo.png" alt="新浪视频">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="https://film.sohu.com/" target="_blank" title="搜狐视频">
+                        <img src="img/sohulogo.png" alt="搜狐视频">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://www.baomihua.com/" target="_blank" title="爆米花">
+                        <img src="img/baomihualogo.png" alt="爆米花">
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a target="_blank" title="看看新闻网视频">
+                        <img src="img/kankannewslogo.png" alt="看看新闻网视频">
+                    </a>
+                </div>
+                <div class="col">
+                    <a target="_blank" title="糖豆视频">
+                        <img src="img/tangdoulogo.png" alt="糖豆视频">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://tv.cctv.com/" target="_blank" title="央视网">
+                        <img src="img/cntvlogo.png" alt="央视网">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://www.acfun.cn/" target="_blank" title="Ac弹幕网">
+                        <img src="img/acfun.png" alt="Ac弹幕网">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://www.bilibili.com/" target="_blank" title="哔哩哔哩">
+                        <img src="img/bilibili.png" alt="哔哩哔哩">
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="http://www.aipai.com/" target="_blank" title="爱拍原创">
+                        <img src="img/aipai.png" alt="爱拍原创">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="video-url">视频网址:</label>
+            <input type="text" id="video-url" placeholder="请输入视频网址">
+        </div>
+        <div class="form-group">
+            <label for="parse-option">选择解析通道:</label>
+            <select id="parse-option">
+                <option value="https://www.yemu.xyz/?url=">[默认] 一号解析通道【稳定通用】</option>
+                <option value="https://jx.xmflv.com/?url=">[推荐] 二号解析通道 【稳定通用】</option>
+                <option value="https://jx.ppflv.com/?url=">[推荐] 三号解析通道 【高清】</option>
+                <option value="https://jx.we-vip.com/?url=">四号解析通道【稳定通用】</option>
+                <option value="https://jx.bozrc.com:4433/player/?url=">五号解析通道【无广告】</option>
+                <option value="http://api.wpsseo.cn/?v=">六号解析通道【全网】</option>
+                <option value="https://vip.laobandq.com/jiexi.php?url=">七号解析通道【无广告】</option>
+                <option value="https://okjx.cc/?url=">八号解析通道【高速】</option>
+                <option value="https://jx.m3u8.tv/jiexi/?url=">九号解析通道【JSON】</option>
+                <option value="https://video.isyour.love/player/getplayer?url=">十号解析通道【互联网聚合生成】</option>
+                <option value="https://yparse.jn1.cc/index.php?url=">十一号解析通道</option>
+                <option value="http://api.wpsseo.cn/?v=">十二号解析通道</option>
+                <option value="https://www.1717yun.com/api/?url=">十三号解析通道</option>
+                <option value="https://www.pangujiexi.cc/jiexi.php?url=">十四号解析通道</option>
+                <option value="https://ckmov.ccyjjd.com/ckmov/?url=">十五号解析通道</option>
+                <option value="https://www.h8jx.com/jiexi.php?url=">十六号解析通道</option>
+                <option value="https://jx.4kdv.com/?url=">十七号解析通道</option>
+                <option value="https://jx.we-vip.com/?url=">十八号解析通道</option>
+                <option value="https://jiexi.janan.net/jiexi/?url=">十九号解析通道</option>
+                <option value="https://svip.bljiex.cc/?v=">二十号解析通道</option>
+            </select>
+        </div>
+        <button onclick="playVideo()">解析播放</button>
+        <iframe id="video-frame" src=""></iframe>
+        <div class="episodes" id="episodes"></div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <p>本站提供的最新电影和电视剧资源均系收集于各大视频网站,本站只提供web页面服务,并不提供影片资源存储,也不参与录制、上传。</p>
+            <p>管理员邮箱：mengchen@qq.com&nbsp; <a href="http://www.miitbeian.gov.cn"><img style="vertical-align: middle;" src="img/beian.png" alt="备案"></a>&nbsp;</p>
+            <p>Copyright&nbsp;&copy;&nbsp; <a href="https://www.xmy7.com/" target="_blank">Xmy7.com</a>版权所有</p>
+            <p><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1263734298'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s19.cnzz.com/z_stat.php%3Fid%3D1263734298%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></p>
+        </div>
+    </footer>
+
+    <script>
+        function playVideo() {
+            var videoUrl = document.getElementById('video-url').value;
+            var parseOption = document.getElementById('parse-option').value;
+            if (!videoUrl) {
+                alert('请输入视频网址');
+                return;
+            }
+            var fullUrl = parseOption + videoUrl;
+            document.getElementById('video-frame').src = fullUrl;
+
+            // 模拟生成剧集列表
+            var episodesContainer = document.getElementById('episodes');
+            episodesContainer.innerHTML = ''; // 清空之前的内容
+            for (var i = 1; i <= 20; i++) {
+                var episode = document.createElement('div');
+                episode.className = 'episode';
+                episode.innerText = '第 ' + i + ' 集';
+                episode.onclick = (function(i) {
+                    return function() {
+                        document.getElementById('video-frame').src = fullUrl + '&episode=' + i;
+                    };
+                })(i);
+                episodesContainer.appendChild(episode);
+            }
+        }
+    </script>
+</body>
+</html>
